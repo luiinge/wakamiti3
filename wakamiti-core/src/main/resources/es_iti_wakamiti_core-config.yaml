@@ -1,0 +1,14 @@
+repository.path:
+  description: |
+    Path of the directory used to store the Wakamiti data.
+    If it is not specified, the default directory of the installation would be used
+  required: false
+  type: text
+
+
+repository.transient:
+  description: |
+    Set whether to use a transient, in-memory repository instead of writing
+    data to disk.
+  type: boolean
+  defaultValue: false

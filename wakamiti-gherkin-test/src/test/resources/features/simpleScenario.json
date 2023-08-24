@@ -1,0 +1,79 @@
+{
+  "node" : {
+    "nodeType" : "AGGREGATOR",
+    "name" : "Test 1 - Simple Scenario",
+    "language" : "en",
+    "source" : "src/test/resources/features/simpleScenario.feature[4,1]",
+    "keyword" : "Feature",
+    "description" : "This is a simple scenario feature without additional behaviour.\n  And this is the second line of comments.",
+    "tags" : [ "Test1" ],
+    "properties" : {
+      "featureProperty" : "A",
+      "gherkinType" : "feature"
+    },
+    "displayName" : "Test 1 - Simple Scenario"
+  },
+  "children" : [
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario",
+        "language" : "en",
+        "id" : "Test1_Scenario1",
+        "source" : "src/test/resources/features/simpleScenario.feature[11,1]",
+        "keyword" : "Scenario",
+        "tags" : [ "Test1" ],
+        "properties" : {
+          "featureProperty" : "A",
+          "gherkinType" : "scenario",
+          "scenarioProperty" : "B"
+        },
+        "displayName" : "Test Scenario"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 8.02 and another number with value 9",
+            "language" : "en",
+            "source" : "src/test/resources/features/simpleScenario.feature[14,3]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 8.02 and another number with value 9"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/simpleScenario.feature[15,3]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to 72.18",
+            "language" : "en",
+            "source" : "src/test/resources/features/simpleScenario.feature[16,3]",
+            "keyword" : "Then",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to 72.18"
+          }
+        }
+      ]
+    }
+  ]
+}

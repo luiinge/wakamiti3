@@ -1,0 +1,281 @@
+{
+  "node" : {
+    "nodeType" : "AGGREGATOR",
+    "name" : "Test 3 - Backgrounds",
+    "language" : "en",
+    "source" : "src/test/resources/features/background.feature[3,1]",
+    "keyword" : "Feature",
+    "tags" : [ "Test3" ],
+    "properties" : {
+      "encoding" : "UTF-8",
+      "gherkinType" : "feature"
+    },
+    "displayName" : "Test 3 - Backgrounds"
+  },
+  "children" : [
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario 1",
+        "language" : "en",
+        "id" : "Test3_Scenario1",
+        "source" : "src/test/resources/features/background.feature[10,1]",
+        "keyword" : "Scenario",
+        "tags" : [ "Test3" ],
+        "properties" : {
+          "encoding" : "UTF-8",
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test Scenario 1"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[5,1]",
+            "keyword" : "Background",
+            "tags" : [ "Test3" ],
+            "properties" : {
+              "gherkinType" : "background"
+            }
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "the set of real numbers ℝ",
+                "language" : "en",
+                "source" : "src/test/resources/features/background.feature[6,3]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given the set of real numbers ℝ"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 8.02 and another number with value 9",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[11,3]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 8.02 and another number with value 9"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[12,3]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to 72.18",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[13,3]",
+            "keyword" : "Then",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to 72.18"
+          }
+        }
+      ]
+    },
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario 2",
+        "language" : "en",
+        "id" : "Test3_Scenario2",
+        "source" : "src/test/resources/features/background.feature[16,1]",
+        "keyword" : "Scenario",
+        "tags" : [ "Test3" ],
+        "properties" : {
+          "encoding" : "UTF-8",
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test Scenario 2"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[5,1]",
+            "keyword" : "Background",
+            "tags" : [ "Test3" ],
+            "properties" : {
+              "gherkinType" : "background"
+            }
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "the set of real numbers ℝ",
+                "language" : "en",
+                "source" : "src/test/resources/features/background.feature[6,3]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given the set of real numbers ℝ"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 7.02 and another number with value 8",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[17,3]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 7.02 and another number with value 8"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[18,3]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to 56.16",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[19,3]",
+            "keyword" : "Then",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to 56.16"
+          }
+        }
+      ]
+    },
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario 3",
+        "language" : "en",
+        "id" : "Test3_Scenario3",
+        "source" : "src/test/resources/features/background.feature[22,1]",
+        "keyword" : "Scenario",
+        "tags" : [ "Test3" ],
+        "properties" : {
+          "encoding" : "UTF-8",
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test Scenario 3"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[5,1]",
+            "keyword" : "Background",
+            "tags" : [ "Test3" ],
+            "properties" : {
+              "gherkinType" : "background"
+            }
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "the set of real numbers ℝ",
+                "language" : "en",
+                "source" : "src/test/resources/features/background.feature[6,3]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given the set of real numbers ℝ"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 8.09 and another number with value 9",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[23,3]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 8.09 and another number with value 9"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[24,3]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to 72.81",
+            "language" : "en",
+            "source" : "src/test/resources/features/background.feature[25,3]",
+            "keyword" : "Then",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to 72.81"
+          }
+        }
+      ]
+    }
+  ]
+}

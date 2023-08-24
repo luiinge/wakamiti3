@@ -1,0 +1,138 @@
+{
+  "node" : {
+    "nodeType" : "AGGREGATOR",
+    "name" : "Test - Scenario with arguments",
+    "language" : "en",
+    "source" : "src/test/resources/features/arguments.feature[1,1]",
+    "keyword" : "Feature",
+    "properties" : {
+      "gherkinType" : "feature"
+    },
+    "displayName" : "Test - Scenario with arguments"
+  },
+  "children" : [
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario with document",
+        "language" : "en",
+        "source" : "src/test/resources/features/arguments.feature[3,1]",
+        "keyword" : "Scenario",
+        "properties" : {
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test Scenario with document"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 8.02 and another number with value 9",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[4,3]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 8.02 and another number with value 9"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[5,3]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to:",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[6,3]",
+            "keyword" : "Then",
+            "document" : {
+              "contentType" : "json",
+              "content" : "{\n  \"result\": 72.18\n}"
+            },
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to:"
+          }
+        }
+      ]
+    },
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test Scenario with data table",
+        "language" : "en",
+        "source" : "src/test/resources/features/arguments.feature[13,1]",
+        "keyword" : "Scenario",
+        "properties" : {
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test Scenario with data table"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "a number with value 8.02 and another number with value 9",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[14,5]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given a number with value 8.02 and another number with value 9"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "both numbers are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[15,5]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When both numbers are multiplied"
+          }
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP",
+            "name" : "the result is equals to:",
+            "language" : "en",
+            "source" : "src/test/resources/features/arguments.feature[16,5]",
+            "keyword" : "Then",
+            "dataTable" : {
+              "values" : [ [ "name", "value" ], [ "result", "72.18" ] ],
+              "rows" : 2,
+              "columns" : 2
+            },
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is equals to:"
+          }
+        }
+      ]
+    }
+  ]
+}

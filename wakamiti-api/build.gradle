@@ -1,0 +1,5 @@
+version '3.0.0'
+
+dependencies {
+    api 'io.github.luiinge:immutable-config:2.1.0'
+}

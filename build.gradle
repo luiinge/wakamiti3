@@ -1,0 +1,79 @@
+plugins {
+    id 'io.freefair.lombok' version '8.0.1' apply false
+    id 'org.javamodularity.moduleplugin' version '1.8.12' apply false
+}
+
+version '3.0.0'
+
+allprojects {
+
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'org.javamodularity.moduleplugin'
+
+    group 'es.iti.wakamiti'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        api 'io.github.luiinge:jexten:1.0.0'
+        annotationProcessor 'io.github.luiinge:jexten-processor:1.0.0'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
+        testImplementation 'org.assertj:assertj-core:3.24.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+        testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.5'
+    }
+
+    test {
+        useJUnitPlatform()
+
+        // log4j configuration for test messages
+        systemProperty ('org.slf4j.simpleLogger.defaultLogLevel','info')
+        systemProperty ('org.slf4j.simpleLogger.log.es.iti.wakamiti','debug')
+        systemProperty ('org.slf4j.simpleLogger.logFile','System.out')
+        systemProperty ('org.slf4j.simpleLogger.showShortLogName','true')
+        systemProperty ('org.slf4j.simpleLogger.showThreadName','false')
+
+
+        testLogging {
+            events 'PASSED', 'FAILED', 'SKIPPED'
+        }
+     }
+
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+
+    java {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+        modularity.inferModulePath = false
+    }
+
+    tasks.withType(JavaCompile) {
+        options.release = 17
+    }
+
+}
+
+// some module require an additional -test module to run integration tests,
+// so we have to include the same test dependencies as regular dependencies
+configure(subprojects.findAll { it.name.endsWith('-test')}) {
+    dependencies {
+        implementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+        implementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
+        implementation 'org.assertj:assertj-core:3.24.2'
+        implementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+        implementation 'org.slf4j:slf4j-simple:2.0.5'
+    }
+}

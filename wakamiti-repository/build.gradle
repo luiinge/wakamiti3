@@ -1,0 +1,6 @@
+version '3.0.0'
+
+dependencies {
+    api project(':wakamiti-api')
+    implementation 'org.hsqldb:hsqldb:2.7.2'
+}

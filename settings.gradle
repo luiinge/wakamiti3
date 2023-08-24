@@ -1,0 +1,8 @@
+rootProject.name = 'wakamiti'
+include 'wakamiti-core'
+include 'wakamiti-api'
+include 'wakamiti-gherkin'
+include 'wakamiti-gherkin-test'
+include 'wakamiti-expressions'
+include 'wakamiti-repository'
+

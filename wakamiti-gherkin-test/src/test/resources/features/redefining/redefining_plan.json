@@ -1,0 +1,703 @@
+{
+  "node" : {
+    "nodeType" : "AGGREGATOR",
+    "name" : "Test Redefined feature - Definition",
+    "language" : "en",
+    "source" : "src/test/resources/features/redefining/definition.feature[3,1]",
+    "keyword" : "Feature",
+    "properties" : {
+      "gherkinType" : "feature"
+    },
+    "displayName" : "Test Redefined feature - Definition"
+  },
+  "children" : [
+    {
+      "node" : {
+        "nodeType" : "TEST_CASE",
+        "name" : "Test scenario",
+        "language" : "en",
+        "id" : "1",
+        "source" : "src/test/resources/features/redefining/definition.feature[9,1]",
+        "keyword" : "Scenario",
+        "properties" : {
+          "gherkinType" : "scenario"
+        },
+        "displayName" : "Test scenario"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "name" : "<definition>",
+            "language" : "es",
+            "source" : "src/test/resources/features/redefining/implementation.feature[7,1]",
+            "keyword" : "Antecedentes",
+            "properties" : {
+              "gherkinType" : "background"
+            },
+            "displayName" : "<definition>"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "el conjunto de números reales ℝ",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[8,3]",
+                "keyword" : "Dado",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Dado el conjunto de números reales ℝ"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "name" : "two numbers",
+            "language" : "en",
+            "source" : "src/test/resources/features/redefining/definition.feature[10,2]",
+            "keyword" : "Given",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Given two numbers"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "un número con valor 6,1 y otro número con valor 3",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[13,2]",
+                "keyword" : "Dado",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Dado un número con valor 6,1 y otro número con valor 3"
+              }
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "un número con valor 6,1 y otro número con valor 3",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[14,2]",
+                "keyword" : "Y",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Y un número con valor 6,1 y otro número con valor 3"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "name" : "they are multiplied",
+            "language" : "en",
+            "source" : "src/test/resources/features/redefining/definition.feature[11,2]",
+            "keyword" : "When",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "When they are multiplied"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "se multiplican ambos números",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[15,2]",
+                "keyword" : "Cuando",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Cuando se multiplican ambos números"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "STEP_AGGREGATOR",
+            "name" : "the result is the product",
+            "language" : "en",
+            "source" : "src/test/resources/features/redefining/definition.feature[12,2]",
+            "keyword" : "Then",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "Then the result is the product"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "el resultado es 18,3",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[16,2]",
+                "keyword" : "Entonces",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Entonces el resultado es 18,3"
+              }
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP",
+                "name" : "el resultado es 18,3",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[17,2]",
+                "keyword" : "Y",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Y el resultado es 18,3"
+              }
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "VIRTUAL_STEP",
+            "name" : "the world is wonderful",
+            "language" : "en",
+            "source" : "src/test/resources/features/redefining/definition.feature[13,2]",
+            "keyword" : "And",
+            "properties" : {
+              "gherkinType" : "step"
+            },
+            "displayNamePattern" : "{keyword} {name}",
+            "displayName" : "And the world is wonderful"
+          }
+        }
+      ]
+    },
+    {
+      "node" : {
+        "nodeType" : "AGGREGATOR",
+        "name" : "Test scenario outline",
+        "language" : "en",
+        "id" : "2",
+        "source" : "src/test/resources/features/redefining/definition.feature[16,1]",
+        "keyword" : "Scenario Outline",
+        "dataTable" : {
+          "values" : [ [ "a", "b", "c" ], [ "1.0", "2", "2.0" ], [ "2.0", "4", "8.0" ], [ "3.0", "6", "18.0" ] ],
+          "rows" : 4,
+          "columns" : 3
+        },
+        "properties" : {
+          "gherkinType" : "scenarioOutline"
+        },
+        "displayNamePattern" : "{keyword}: {name}",
+        "displayName" : "Scenario Outline: Test scenario outline"
+      },
+      "children" : [
+        {
+          "node" : {
+            "nodeType" : "TEST_CASE",
+            "name" : "Test scenario outline [1]",
+            "language" : "en",
+            "id" : "2_1",
+            "source" : "src/test/resources/features/redefining/definition.feature[16,1]",
+            "keyword" : "Scenario",
+            "properties" : {
+              "gherkinType" : "scenario"
+            },
+            "displayName" : "Test scenario outline [1]"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "<definition>",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[3,1][7,1]",
+                "keyword" : "Antecedentes",
+                "properties" : {
+                  "gherkinType" : "background"
+                },
+                "displayName" : "<definition>"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el conjunto de números reales ℝ",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][8,3]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado el conjunto de números reales ℝ"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "VIRTUAL_STEP",
+                "name" : "a number with value 1.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[17,2]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given a number with value 1.0"
+              }
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "another number with value 2",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[18,2]",
+                "keyword" : "And",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "And another number with value 2"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "un número con valor 1.0 y otro número con valor 2",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][27,2]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado un número con valor 1.0 y otro número con valor 2"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "they are multiplied",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[19,2]",
+                "keyword" : "When",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "When they are multiplied"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "se multiplican ambos números",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][29,2]",
+                    "keyword" : "Cuando",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Cuando se multiplican ambos números"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "the result is 2.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[20,2]",
+                "keyword" : "Then",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Then the result is 2.0"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 2.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][31,2]",
+                    "keyword" : "Entonces",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Entonces el resultado es 2.0"
+                  }
+                },
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 2.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][32,2]",
+                    "keyword" : "Y",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Y el resultado es 2.0"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "TEST_CASE",
+            "name" : "Test scenario outline [2]",
+            "language" : "en",
+            "id" : "2_2",
+            "source" : "src/test/resources/features/redefining/definition.feature[16,1]",
+            "keyword" : "Scenario",
+            "properties" : {
+              "gherkinType" : "scenario"
+            },
+            "displayName" : "Test scenario outline [2]"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "<definition>",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[3,1][7,1]",
+                "keyword" : "Antecedentes",
+                "properties" : {
+                  "gherkinType" : "background"
+                },
+                "displayName" : "<definition>"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el conjunto de números reales ℝ",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][8,3]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado el conjunto de números reales ℝ"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "VIRTUAL_STEP",
+                "name" : "a number with value 2.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[17,2]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given a number with value 2.0"
+              }
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "another number with value 4",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[18,2]",
+                "keyword" : "And",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "And another number with value 4"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "un número con valor 2.0 y otro número con valor 4",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][27,2]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado un número con valor 2.0 y otro número con valor 4"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "they are multiplied",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[19,2]",
+                "keyword" : "When",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "When they are multiplied"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "se multiplican ambos números",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][29,2]",
+                    "keyword" : "Cuando",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Cuando se multiplican ambos números"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "the result is 8.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[20,2]",
+                "keyword" : "Then",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Then the result is 8.0"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 8.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][31,2]",
+                    "keyword" : "Entonces",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Entonces el resultado es 8.0"
+                  }
+                },
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 8.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][32,2]",
+                    "keyword" : "Y",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Y el resultado es 8.0"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node" : {
+            "nodeType" : "TEST_CASE",
+            "name" : "Test scenario outline [3]",
+            "language" : "en",
+            "id" : "2_3",
+            "source" : "src/test/resources/features/redefining/definition.feature[16,1]",
+            "keyword" : "Scenario",
+            "properties" : {
+              "gherkinType" : "scenario"
+            },
+            "displayName" : "Test scenario outline [3]"
+          },
+          "children" : [
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "<definition>",
+                "language" : "es",
+                "source" : "src/test/resources/features/redefining/implementation.feature[3,1][7,1]",
+                "keyword" : "Antecedentes",
+                "properties" : {
+                  "gherkinType" : "background"
+                },
+                "displayName" : "<definition>"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el conjunto de números reales ℝ",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][8,3]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado el conjunto de números reales ℝ"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "VIRTUAL_STEP",
+                "name" : "a number with value 3.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[17,2]",
+                "keyword" : "Given",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Given a number with value 3.0"
+              }
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "another number with value 6",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[18,2]",
+                "keyword" : "And",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "And another number with value 6"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "un número con valor 3.0 y otro número con valor 6",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][27,2]",
+                    "keyword" : "Dado",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Dado un número con valor 3.0 y otro número con valor 6"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "they are multiplied",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[19,2]",
+                "keyword" : "When",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "When they are multiplied"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "se multiplican ambos números",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][29,2]",
+                    "keyword" : "Cuando",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Cuando se multiplican ambos números"
+                  }
+                }
+              ]
+            },
+            {
+              "node" : {
+                "nodeType" : "STEP_AGGREGATOR",
+                "name" : "the result is 18.0",
+                "language" : "en",
+                "source" : "src/test/resources/features/redefining/definition.feature[20,2]",
+                "keyword" : "Then",
+                "properties" : {
+                  "gherkinType" : "step"
+                },
+                "displayNamePattern" : "{keyword} {name}",
+                "displayName" : "Then the result is 18.0"
+              },
+              "children" : [
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 18.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][31,2]",
+                    "keyword" : "Entonces",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Entonces el resultado es 18.0"
+                  }
+                },
+                {
+                  "node" : {
+                    "nodeType" : "STEP",
+                    "name" : "el resultado es 18.0",
+                    "language" : "es",
+                    "source" : "src/test/resources/features/redefining/implementation.feature[3,1][32,2]",
+                    "keyword" : "Y",
+                    "properties" : {
+                      "gherkinType" : "step"
+                    },
+                    "displayNamePattern" : "{keyword} {name}",
+                    "displayName" : "Y el resultado es 18.0"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
