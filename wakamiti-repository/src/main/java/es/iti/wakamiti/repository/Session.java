@@ -1,16 +1,16 @@
 package es.iti.wakamiti.repository;
 
+import es.iti.wakamiti.api.*;
 import java.sql.*;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.regex.*;
 import java.util.stream.*;
 
-import es.iti.wakamiti.api.WakamitiException;
-
 public class Session implements AutoCloseable {
 
 	private static final Pattern PARAM_REGEX = Pattern.compile("\\?\\d\\d?");
+
 
 	@FunctionalInterface
 	interface Mapper<T> {
@@ -24,12 +24,17 @@ public class Session implements AutoCloseable {
 		}
 	}
 
+	private record ParsedSQL (String sql, int[] argIndexes) {}
+
+	private final Log log;
 	private final Supplier<Connection> connectionProvider;
 	private final Map<String, PreparedStatement> statements = new HashMap<>();
+	private final Map<String, ParsedSQL> parsedSQL = new HashMap<>();
 	private Connection connection;
 
-	public Session(Supplier<Connection> connectionProvider) {
+	public Session(Supplier<Connection> connectionProvider, Log log) {
 		this.connectionProvider = connectionProvider;
+		this.log = log;
 	}
 
 
@@ -45,14 +50,20 @@ public class Session implements AutoCloseable {
 
 
 	@Override
-	public void close() throws SQLException {
-		for (PreparedStatement statement : statements.values()) {
-			if (!statement.isClosed()) {
-				statement.close();
+	public void close() {
+		try {
+			for (PreparedStatement statement : statements.values()) {
+				if (!statement.isClosed()) {
+					statement.close();
+				}
 			}
-		}
-		if (connection != null && !connection.isClosed()) {
-			connection.close();
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
+			statements.clear();
+			parsedSQL.clear();
+		} catch (SQLException e) {
+			throw new WakamitiException(e);
 		}
 	}
 
@@ -73,28 +84,37 @@ public class Session implements AutoCloseable {
 
 	private PreparedStatement statement(String sql, Object... args) {
 		try {
-			// replace the ?1, ?2, etc. by simple ? and create the actual parameter
-			List<Object> actualArgs = new LinkedList<>();
-			Matcher paramMatcher = PARAM_REGEX.matcher(sql);
-			while (paramMatcher.find()) {
-				int index = Integer.parseInt(paramMatcher.group().substring(1));
-				actualArgs.add(args[index]);
-			}
-			String actualSql = PARAM_REGEX.matcher(sql).replaceAll("?");
-
-			PreparedStatement cached = statements.get(actualSql);
+			ParsedSQL parsed = parsedSQL.computeIfAbsent(sql, this::parseSql);
+			log.trace("[SQL] <<{}>> using arguments {}" ,()->parsed.sql, ()->Arrays.toString(args));
+			PreparedStatement cached = statements.get(parsed.sql);
 			if (cached == null || cached.isClosed()) {
-				cached = connection().prepareStatement(actualSql);
-				statements.put(actualSql, cached);
+				cached = connection().prepareStatement(parsed.sql);
+				statements.put(parsed.sql, cached);
 			}
-			for (int i = 0; i < actualArgs.size(); i++) {
-				cached.setObject(i+1, actualArgs.get(i));
+			for (int i = 0; i < parsed.argIndexes.length; i++) {
+				cached.setObject(i+1, args[parsed.argIndexes[i]]);
 			}
 
 			return cached;
 		} catch (SQLException e) {
 			throw new WakamitiException(e);
 		}
+	}
+
+
+	/* replace the ?1, ?2, etc. by simple ? and annotate the actual argument index to use */
+	private ParsedSQL parseSql (String sql) {
+		List<Integer> argIndexes = new LinkedList<>();
+		Matcher paramMatcher = PARAM_REGEX.matcher(sql);
+		while (paramMatcher.find()) {
+			int index = Integer.parseInt(paramMatcher.group().substring(1));
+			argIndexes.add(index-1);
+		}
+		String actualSql = PARAM_REGEX.matcher(sql)
+			.replaceAll("?")
+			.replaceAll("\\n"," ")
+			.replaceAll("\\s+"," ");
+		return new ParsedSQL(actualSql, argIndexes.stream().mapToInt(Integer::intValue).toArray());
 	}
 
 

@@ -2,5 +2,10 @@ version '3.0.0'
 
 dependencies {
     api project(':wakamiti-api')
-    implementation 'org.hsqldb:hsqldb:2.7.2'
+    implementation 'com.h2database:h2:2.1.214'
+}
+
+test {
+    systemProperty('org.slf4j.simpleLogger.defaultLogLevel', 'info')
+    systemProperty('org.slf4j.simpleLogger.log.es.iti.wakamiti', 'trace')
 }

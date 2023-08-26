@@ -11,7 +11,7 @@ public class PlanNode {
     private NodeType nodeType;
     private String name;
     private String language;
-    private String id;
+    private String identifier;
     private String source;
     private String keyword;
     private DataTable dataTable;
@@ -54,7 +54,9 @@ public class PlanNode {
             displayNamePattern
                 .replace("{name}",Objects.requireNonNullElse(name,""))
                 .replace("{keyword}",Objects.requireNonNullElse(keyword,""))
-                .replace("{id}",Objects.requireNonNullElse(id,""));
+                .replace("{identifier}",Objects.requireNonNullElse(identifier,""))
+                .replace("{nodeType}", nodeType == null ? "" : nodeType.toString())
+            ;
     }
 
 

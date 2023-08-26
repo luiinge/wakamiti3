@@ -6,14 +6,14 @@ import java.util.stream.Stream;
 import es.iti.wakamiti.api.WakamitiException;
 import es.iti.wakamiti.api.contributors.Contributor;
 import es.iti.wakamiti.api.plan.PlanNode;
-import jexten.ExtensionPoint;
 
-@ExtensionPoint(version = "3.0")
+
 public interface PlanRepository extends Contributor {
 
 
 	Optional<PlanNode> getNode(UUID id);
-	Optional<UUID> getParentNode(UUID id);
+	boolean existsNode(UUID id);
+	Optional<PlanNode> getParentNode(UUID id);
 
 
 	/**
@@ -47,6 +47,9 @@ public interface PlanRepository extends Contributor {
 	void detachChildNode(UUID parent, UUID child);
 
 
+	List<PlanNode> getNodeChildren(UUID id);
+	Stream<PlanNode> getNodeDescendants(UUID id);
+	Stream<PlanNode> getNodeAncestors(UUID id);
 	/**
 	 * Persist a plan node in the repository. If the node id did exist previously, it
 	 * will update the node content; otherwise, it will create a new record and assign a

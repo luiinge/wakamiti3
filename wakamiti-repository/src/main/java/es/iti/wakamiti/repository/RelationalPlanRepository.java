@@ -2,21 +2,20 @@ package es.iti.wakamiti.repository;
 
 
 import es.iti.wakamiti.api.*;
-import es.iti.wakamiti.api.lang.ThrowableFunction;
 import es.iti.wakamiti.api.plan.PlanNode;
 import es.iti.wakamiti.api.repository.*;
 import java.sql.*;
 import java.util.*;
 import java.util.stream.*;
 
-public class Repo implements AutoCloseable {
+public class RelationalPlanRepository implements PlanRepository, AutoCloseable {
 
 	private static final Log log = Log.of();
 	private final Session session;
 
 
-	public Repo(RepositoryServer server) {
-		this.session = new Session(server::newConnection);
+	public RelationalPlanRepository(RepositoryServer server) {
+		this.session = new Session(server::newConnection,log);
 	}
 
 

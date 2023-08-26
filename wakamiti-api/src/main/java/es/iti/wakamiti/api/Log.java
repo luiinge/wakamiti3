@@ -1,8 +1,10 @@
 package es.iti.wakamiti.api;
 
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Stream;
+
 import org.slf4j.*;
 
 import slf4jansi.AnsiLogger;
@@ -14,8 +16,10 @@ public class Log {
 
     static {
         AnsiLogger.addStyle("debug","white,faint");
+        AnsiLogger.addStyle("trace","white,faint");
         AnsiLogger.addStyle("resource","cyan,underline");
         AnsiLogger.addStyle("contentType","yellow");
+        AnsiLogger.setAnsiEnabled(true);
     }
 
     public static Log of() {
@@ -139,6 +143,22 @@ public class Log {
             delegate.debug(message, argumentValues);
         }
     }
+
+
+    public void trace(String message) {
+        delegate.trace(message);
+    }
+
+    public void trace(String message, Object... arguments) {
+        delegate.trace(message, arguments);
+    }
+
+    public void trace(String message, Supplier<?>... arguments) {
+        if (delegate.isTraceEnabled()) {
+            var argumentValues = Stream.of(arguments).map(Supplier::get).toArray();
+            delegate.trace(message, argumentValues);
+        }
+    }
     
     
     private static Throwable getCause(Throwable throwable) {
@@ -151,5 +171,8 @@ public class Log {
             return throwable;
         }
     }
+
+
+
 
 }

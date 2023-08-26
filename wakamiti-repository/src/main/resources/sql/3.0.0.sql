@@ -11,7 +11,7 @@ create table plan_node(
     data_table clob,
     document clob,
     document_type varchar(100),
-    primary key (id)
+    primary key (node_id)
 );
 create table plan_node_tag(
     node_id UUID not null,
@@ -21,18 +21,29 @@ create table plan_node_tag(
 );
 create table plan_node_property(
     node_id UUID not null,
-    key VARCHAR(100) not null,
-    value VARCHAR(100),
-    primary key (node_id, key),
+    property_key VARCHAR(100) not null,
+    property_value VARCHAR(100),
+    primary key (node_id, property_key),
     foreign key (node_id) references plan_node(node_id) on delete cascade
 );
 create table plan_node_hierarchy(
     node_id UUID not null,
     root UUID not null,
-    path ARRAY UUID array default array[],
+    path UUID ARRAY,
     sibling_order smallint not null,
     primary key (node_id),
     foreign key (node_id) references plan_node(node_id) on delete cascade,
     foreign key (root) references plan_node(node_id) on delete cascade
 );
 create index idx_plan_node_hierarchy_root on plan_node_hierarchy(root);
+create table plan (
+    plan_id UUID not null,
+    organization varchar(100),
+    project varchar(100),
+    name varchar(300),
+    hash char(64) not null,
+    root_node UUID,
+    tag_filter varchar(300),
+    primary key (plan_id),
+    foreign key (root_node) references plan_node(node_id) on delete cascade
+);

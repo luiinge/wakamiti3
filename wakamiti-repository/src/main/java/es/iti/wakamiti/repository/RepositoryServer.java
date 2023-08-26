@@ -1,6 +1,6 @@
 package es.iti.wakamiti.repository;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.sql.*;
@@ -9,81 +9,102 @@ import java.util.stream.*;
 
 import javax.sql.DataSource;
 
-import org.hsqldb.Server;
-import org.hsqldb.jdbc.JDBCDataSource;
-import org.hsqldb.persist.HsqlProperties;
-import org.hsqldb.server.ServerAcl;
+import org.h2.jdbcx.JdbcDataSource;
 
 import es.iti.wakamiti.api.*;
 import jexten.Version;
+import org.h2.tools.Server;
+
 
 public class RepositoryServer {
 
-	private static final Log log = Log.of();
+	private static final Log log = Log.of("wakamiti.repository");
 
-	private static final String USER = "wakamiti";
-	private static final String PWD = "wakamiti";
+	private static final String USER = "sa";
+	private static final String PWD = "sa";
 	private static final String SCHEMA = "WAKAMITI";
 
+	private static final PrintWriter dbLogWriter = new PrintWriter(new Writer() {
+		@Override
+		public void write(char[] cbuf, int off, int len) throws IOException {
+			if (len == 1 && cbuf[off] == '\n') return;
+			log.trace(String.copyValueOf(cbuf,off,len));
+		}
+	    @Override
+		public void flush() throws IOException {
+			//
+		}
+	    @Override
+		public void close() throws IOException {
+			//
+		}
+	});
+
+	private final Server server;
 	private final DataSource dataSource;
-	private final Server dbServer;
 
 
 	public RepositoryServer(Path file) {
-		int port = freePort();
-		this.dataSource = createDataSource(port);
-		this.dbServer = createServer(file,port);
+		file = file.resolve(SCHEMA);
+		log.debug("using database file {file}", file);
+		this.server = createServer(file);
+		this.dataSource = createDataSource(file);
 	}
+
+
 
 
 
 	public void start() {
-		dbServer.start();
-		prepareDatabase();
-	}
-
-
-	public void stop() {
-		dbServer.stop();
-	}
-
-
-	private static Server createServer(Path file, int port) throws WakamitiException {
-		HsqlProperties serverProperties = new HsqlProperties();
-		serverProperties.setProperty("server.database.0", "file:%s;user=%s;password=%s".formatted(file,USER,PWD));
-		serverProperties.setProperty("server.dbname.0",SCHEMA);
-		serverProperties.setProperty("server.port",port);
-		Server dbServer = new Server();
 		try {
-			dbServer.setProperties(serverProperties);
-			return dbServer;
-		} catch (IOException | ServerAcl.AclFormatException e) {
-			throw new WakamitiException(e);
-		}
-	}
-
-
-	public Connection newConnection() {
-		try {
-			return dataSource.getConnection();
+			server.start();
+			prepareDatabase();
 		} catch (SQLException e) {
 			throw new WakamitiException(e);
 		}
 	}
 
 
-	private static DataSource createDataSource(int port) {
-		JDBCDataSource dataSource = new JDBCDataSource();
-		dataSource.setURL("jdbc:hsqldb:hsql://localhost:"+port);
+	public void stop() {
+		server.stop();
+	}
+
+
+
+	public Connection newConnection() {
+		try {
+			Connection connection = dataSource.getConnection();
+			log.debug("using new connection with URL {}", connection.getMetaData().getURL());
+			connection.setAutoCommit(false);
+			return connection;
+		} catch (SQLException e) {
+			throw new WakamitiException(e);
+		}
+	}
+
+
+	private Server createServer(Path file) {
+		try {
+			Server server = Server.createTcpServer("-baseDir",file.toString(),"-ifNotExists");
+			return server;
+		} catch (SQLException e) {
+			throw new WakamitiException(e);
+		}
+	}
+
+
+	private static DataSource createDataSource(Path file) {
+		JdbcDataSource dataSource = new JdbcDataSource();
 		dataSource.setUser(USER);
 		dataSource.setPassword(PWD);
-		dataSource.setDatabase(SCHEMA);
+		dataSource.setURL("jdbc:h2:tcp://localhost/"+SCHEMA);
+		dataSource.setLogWriter(dbLogWriter);
 		return dataSource;
 	}
 
 
 	private void prepareDatabase() {
-		try (var session = new Session(this::newConnection)) {
+		try (var session = new Session(this::newConnection, log)) {
 			initDatabase(session);
 			List<Version> appliedPatches = findAppliedPatches(session);
   		    Map<Version,Path> pendingPatches = findPendingPatches(appliedPatches);
@@ -96,13 +117,9 @@ public class RepositoryServer {
 
 
 	private void initDatabase(Session session) throws SQLException {
-		if (!session.exists("SELECT 1 FROM INFORMATION_SCHEMA.SYSTEM_TABLES WHERE TABLE_CAT = ?1", SCHEMA)) {
+		if (!session.exists("SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DBCHANGELOG'", SCHEMA)) {
 			log.info("First time using the data repository, preparing the database...");
-			session.execute(List.of(
-				"ALTER CATALOG PUBLIC RENAME TO "+SCHEMA,
-				"ALTER SCHEMA PUBLIC RENAME TO "+SCHEMA,
-				"CREATE TABLE DBCHANGELOG (VERSION VARCHAR(20), TIMESTAMP TIMESTAMP, PRIMARY KEY (VERSION))"
-			));
+			session.execute("CREATE TABLE DBCHANGELOG (VERSION VARCHAR(20), TIMESTAMP TIMESTAMP, PRIMARY KEY (VERSION))");
 		}
 	}
 
@@ -110,15 +127,16 @@ public class RepositoryServer {
 	private void applyPendingPatches(Session session, Map<Version,Path> pendingPatches)
 	throws SQLException {
 		try {
-			List<String> statements = new LinkedList<>();
 			for (var pendingPatch : pendingPatches.entrySet()) {
 				Version version = pendingPatch.getKey();
 				Path file = pendingPatch.getValue();
 				log.info("Applying version {} patch to data repository", version);
-				statements.addAll(Arrays.asList(Files.readString(file).split(";")));
-				statements.add("INSERT INTO DBCHANGELOG (VERSION) VALUES ('"+version+"')");
+				for (String sql : Files.readString(file).split(";")) {
+					session.execute(sql);
+				}
+				session.execute("INSERT INTO DBCHANGELOG (VERSION) VALUES ('"+version+"')");
 			}
-			session.execute(statements);
+
 		} catch (IOException e) {
 			throw new WakamitiException(e);
 		}
