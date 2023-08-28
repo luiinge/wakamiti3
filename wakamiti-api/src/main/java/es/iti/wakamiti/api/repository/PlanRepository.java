@@ -13,6 +13,7 @@ public interface PlanRepository extends Contributor {
 
 	Optional<PlanNode> getNode(UUID id);
 	boolean existsNode(UUID id);
+	Optional<UUID> getParentNodeID(UUID id);
 	Optional<PlanNode> getParentNode(UUID id);
 
 
@@ -47,8 +48,13 @@ public interface PlanRepository extends Contributor {
 	void detachChildNode(UUID parent, UUID child);
 
 
+	Optional<UUID> getRootNodeID(UUID id);
+	Optional<PlanNode> getRootNode(UUID id);
+	List<UUID> getNodeChildrenID(UUID id);
 	List<PlanNode> getNodeChildren(UUID id);
+	Stream<UUID> getNodeDescendantsID(UUID id);
 	Stream<PlanNode> getNodeDescendants(UUID id);
+	Stream<UUID> getNodeAncestorsID(UUID id);
 	Stream<PlanNode> getNodeAncestors(UUID id);
 	/**
 	 * Persist a plan node in the repository. If the node id did exist previously, it
@@ -60,7 +66,6 @@ public interface PlanRepository extends Contributor {
 
 	Stream<PlanNode> searchNodes(PlanNodeCriteria criteria);
 
-
-
+	void commit();
 
 }

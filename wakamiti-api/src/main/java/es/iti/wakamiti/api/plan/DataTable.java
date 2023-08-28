@@ -1,12 +1,14 @@
 package es.iti.wakamiti.api.plan;
 
-import java.util.List;
+import java.util.*;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 import lombok.*;
 
 @Setter
 @Getter
+@EqualsAndHashCode
 public final class DataTable implements NodeArgument {
 
     private List<List<String>> values;
@@ -32,11 +34,32 @@ public final class DataTable implements NodeArgument {
     }
 
 
+
+
     @Override
     public NodeArgument copy(UnaryOperator<String> replacingVariablesMethod) {
         return new DataTable(values.stream().map( row ->
             row.stream().map(replacingVariablesMethod).toList()
         ).toList());
+    }
+
+
+
+    @Override
+    public String toString() {
+        return values.stream().map(row -> String.join("|", row)).collect(Collectors.joining("||"));
+    }
+
+
+    public static DataTable fromString(String representation) {
+        if (representation == null) {
+            return null;
+        }
+        List<List<String>> values = new LinkedList<>();
+        for (String row : representation.split("\\|\\|")) {
+            values.add(Arrays.asList(row.split("\\|")));
+        }
+        return new DataTable(values);
     }
 
 

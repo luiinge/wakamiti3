@@ -119,7 +119,8 @@ public class Session implements AutoCloseable {
 
 
 	public <T> Stream<T> stream(Mapper<T> mapper, String sql, Object... args) {
-		try (var resultSet = statement(sql,args).executeQuery()) {
+		try {
+			var resultSet = statement(sql,args).executeQuery();
 			return stream(resultSet,mapper);
 		} catch (SQLException e) {
 			throw new WakamitiException(e);
@@ -188,6 +189,28 @@ public class Session implements AutoCloseable {
 	}
 
 
+	public void executeBatch(String sql, List<List<?>> argsSet) {
+		try {
+			ParsedSQL parsed = parsedSQL.computeIfAbsent(sql, this::parseSql);
+			log.trace("[SQL] <<{}>> using arguments {}", parsed.sql, argsSet);
+			PreparedStatement cached = statements.get(parsed.sql);
+			if (cached == null || cached.isClosed()) {
+				cached = connection().prepareStatement(parsed.sql);
+				statements.put(parsed.sql, cached);
+			}
+			for (List<?> args : argsSet) {
+				for (int i = 0; i < parsed.argIndexes.length; i++) {
+					cached.setObject(i + 1, args.get(parsed.argIndexes[i]));
+				}
+				cached.addBatch();
+			}
+			cached.executeBatch();
+		} catch (SQLException e) {
+			throw new WakamitiException(e);
+		}
+	}
+
+
 
 
 	private <T> Stream<T> stream(ResultSet resultSet, Mapper<T> mapper) {
@@ -212,7 +235,7 @@ public class Session implements AutoCloseable {
 		@Override
 		public boolean hasNext() {
 			try {
-				return !resultSet.isLast();
+				return resultSet.next();
 			} catch (SQLException e) {
 				throw new WakamitiException(e);
 			}
@@ -220,13 +243,9 @@ public class Session implements AutoCloseable {
 
 		@Override
 		public T next() {
-			try {
-				resultSet.next();
-				return mapper.map(resultSet);
-			} catch (SQLException e) {
-				throw new WakamitiException(e);
-			}
+			return mapper.map(resultSet);
 		}
+
 
 		@Override
 		public void remove() {

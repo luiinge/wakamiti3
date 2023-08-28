@@ -3,6 +3,7 @@ version '3.0.0'
 dependencies {
     api project(':wakamiti-api')
     implementation 'com.h2database:h2:2.1.214'
+    implementation 'com.github.f4b6a3:ulid-creator:5.2.1'
 }
 
 test {

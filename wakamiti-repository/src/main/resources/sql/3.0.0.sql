@@ -1,49 +1,55 @@
-create table plan_node(
-    node_id UUID not null,
-    type tinyint not null,
-    name varchar(300),
-    language varchar(10),
-    id varchar(100),
-    source varchar(300),
-    keyword varchar(100),
-    description clob,
-    display_name_pattern varchar(100),
-    data_table clob,
-    document clob,
-    document_type varchar(100),
-    primary key (node_id)
+CREATE TABLE PLAN_NODE(
+    NODE_ID UUID NOT NULL,
+    TYPE TINYINT NOT NULL,
+    NAME VARCHAR(300),
+    LANGUAGE VARCHAR(10),
+    IDENTIFIER VARCHAR(100),
+    SOURCE VARCHAR(300),
+    KEYWORD VARCHAR(100),
+    DESCRIPTION CLOB,
+    DISPLAY_NAME_PATTERN VARCHAR(100),
+    DATA_TABLE CLOB,
+    DOCUMENT CLOB,
+    DOCUMENT_TYPE VARCHAR(100),
+    PRIMARY KEY (NODE_ID)
 );
-create table plan_node_tag(
-    node_id UUID not null,
-    tag VARCHAR(100) not null,
-    primary key (node_id, tag),
-    foreign key (node_id) references plan_node(node_id) on delete cascade
+CREATE TABLE PLAN_NODE_TAG(
+    NODE_ID UUID NOT NULL,
+    TAG VARCHAR(100) NOT NULL,
+    PRIMARY KEY (NODE_ID, TAG),
+    FOREIGN KEY (NODE_ID) REFERENCES PLAN_NODE(NODE_ID) ON DELETE CASCADE
 );
-create table plan_node_property(
-    node_id UUID not null,
-    property_key VARCHAR(100) not null,
-    property_value VARCHAR(100),
-    primary key (node_id, property_key),
-    foreign key (node_id) references plan_node(node_id) on delete cascade
+CREATE TABLE PLAN_NODE_PROPERTY(
+    NODE_ID UUID NOT NULL,
+    PROPERTY_KEY VARCHAR(100) NOT NULL,
+    PROPERTY_VALUE VARCHAR(100),
+    PRIMARY KEY (NODE_ID, PROPERTY_KEY),
+    FOREIGN KEY (NODE_ID) REFERENCES PLAN_NODE(NODE_ID) ON DELETE CASCADE
 );
-create table plan_node_hierarchy(
-    node_id UUID not null,
-    root UUID not null,
-    path UUID ARRAY,
-    sibling_order smallint not null,
-    primary key (node_id),
-    foreign key (node_id) references plan_node(node_id) on delete cascade,
-    foreign key (root) references plan_node(node_id) on delete cascade
+CREATE VIEW V_PLAN_NODE	AS
+    SELECT N.*,
+    ARRAY(SELECT TAG FROM PLAN_NODE_TAG T WHERE T.NODE_ID = N.NODE_ID) AS TAGS,
+    ARRAY(SELECT PROPERTY_KEY||'='||PROPERTY_VALUE FROM PLAN_NODE_PROPERTY P WHERE P.NODE_ID = N.NODE_ID) AS PROPERTIES
+    FROM PLAN_NODE N
+;
+CREATE TABLE PLAN_NODE_HIERARCHY(
+    NODE_ID UUID NOT NULL,
+    ROOT UUID NOT NULL,
+    PATH UUID ARRAY,
+    SIBLING_ORDER SMALLINT NOT NULL,
+    PRIMARY KEY (NODE_ID),
+    FOREIGN KEY (NODE_ID) REFERENCES PLAN_NODE(NODE_ID) ON DELETE CASCADE,
+    FOREIGN KEY (ROOT) REFERENCES PLAN_NODE(NODE_ID) ON DELETE CASCADE
 );
-create index idx_plan_node_hierarchy_root on plan_node_hierarchy(root);
-create table plan (
-    plan_id UUID not null,
-    organization varchar(100),
-    project varchar(100),
-    name varchar(300),
-    hash char(64) not null,
-    root_node UUID,
-    tag_filter varchar(300),
-    primary key (plan_id),
-    foreign key (root_node) references plan_node(node_id) on delete cascade
+CREATE INDEX IDX_PLAN_NODE_HIERARCHY_ROOT ON PLAN_NODE_HIERARCHY(ROOT);
+CREATE TABLE PLAN (
+    PLAN_ID UUID NOT NULL,
+    ORGANIZATION VARCHAR(100),
+    PROJECT VARCHAR(100),
+    NAME VARCHAR(300),
+    HASH CHAR(64) NOT NULL,
+    ROOT_NODE UUID,
+    TAG_FILTER VARCHAR(300),
+    PRIMARY KEY (PLAN_ID),
+    FOREIGN KEY (ROOT_NODE) REFERENCES PLAN_NODE(NODE_ID) ON DELETE CASCADE
 );

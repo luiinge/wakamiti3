@@ -7,7 +7,18 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 public final class Document implements NodeArgument {
+
+
+    public static Document of(String contentType, String content) {
+        if (content == null || content.isBlank()) {
+            return null;
+        }
+        return new Document(contentType,content);
+    }
+
 
     private String contentType;
     private String content;
@@ -15,6 +26,11 @@ public final class Document implements NodeArgument {
     @Override
     public NodeArgument copy(UnaryOperator<String> replacingVariablesMethod) {
         return new Document(contentType, replacingVariablesMethod.apply(content));
+    }
+
+
+    public String contentType() {
+        return contentType;
     }
 
 }

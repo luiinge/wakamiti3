@@ -4,7 +4,7 @@ import java.util.*;
 
 import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @EqualsAndHashCode @ToString
 public class PlanNode {
 
     private UUID nodeID;
@@ -39,6 +39,19 @@ public class PlanNode {
     }
 
 
+
+    public PlanNode addTag(String tag) {
+        this.tags.add(tag);
+        return this;
+    }
+
+
+    public PlanNode addTags(Collection<String> tags) {
+        this.tags.addAll(tags);
+        return this;
+    }
+
+
     public boolean hasProperty(String property, String value) {
         return value.equals(this.properties.get(property));
     }
@@ -58,8 +71,6 @@ public class PlanNode {
                 .replace("{nodeType}", nodeType == null ? "" : nodeType.toString())
             ;
     }
-
-
 
 
 }
